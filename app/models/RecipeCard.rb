@@ -8,7 +8,7 @@ class RecipeCard
         @rating = rating
         @recipe = recipe
         @user = user
-        @@all << all
+        @@all << self
     end
 
     def self.all 

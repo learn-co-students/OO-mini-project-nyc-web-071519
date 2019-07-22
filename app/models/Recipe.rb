@@ -1,22 +1,19 @@
 class Recipe
 
-    # attr_accessor :ingredient, 
+    attr_accessor :name
     @@all = []
 
-    def initialize()
+    def initialize(name)
+        @name = name
         @@all << self
     end
 
-    def recipe_ingredient_helper
-        RecipeIngredient.all.select{|i| i.recipe == self}
+    def self.all
+        @@all
     end
 
     def ingredients
         recipe_ingredient_helper.map{|i| i.ingredient}
-    end
-
-    def recipe_cards_helper
-        RecipeCard.all.select{|i| i.recipe == self}
     end
 
     def users
@@ -32,9 +29,19 @@ class Recipe
       
     end
 
-    def add_ingredients
-        
+    def add_ingredients(ingredients_array)
+        ingredients_array.each do |ingredient|
+            RecipeIngredient.new(self, ingredient)
+        end
     end
 
+
+     def recipe_ingredient_helper
+        RecipeIngredient.all.select{|i| i.recipe == self}
+    end
+
+    def recipe_cards_helper
+        RecipeCard.all.select{|i| i.recipe == self}
+    end
 
 end

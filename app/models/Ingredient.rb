@@ -1,17 +1,21 @@
 class Ingredient
 
+    attr_reader :name
     @@all = []
 
-    def initialize
+    def initialize(name)
+        @name = name
         @@all << self
     end
 
-    def helper
-        
+    def self.all
+        @@all
     end
 
-    def most_common_allergen
+    def self.most_common_allergen
+        array = Allergy.all.map{|allergy| allergy.ingredient}
+        array.max_by{|i| array.count(i)}
 
     end
-
+    
 end
